@@ -36,8 +36,51 @@ function generateTime(unit) {
         }
         resultsArray.push(time);
     }
+    
+    let valid = [];
 
-    console.log(resultsArray);
+    for (let i = 0; i < resultsArray.length; i++) {
+        let indicator;
+        let res = resultsArray[i]; 
+    
+        if (res !== 0) {
+            switch(i) {
+                case 0:
+                    indicator = res > 1 ? `${res} years` : "1 year";
+                    break;
+                case 1:
+                    indicator = res > 1 ? `${res} days` : "1 day";
+                    break;
+                case 2:
+                    indicator = res > 1 ? `${res} hours` : "1 hour";
+                    break;
+                case 3:
+                    indicator = res > 1 ? `${res} minutes` : "1 minute";
+                    break;
+                case 4:
+                    indicator = res > 1 ? `${res} seconds` : "1 second";
+                    break;
+            }
+    
+            valid.push(indicator);
+        }
+    }
+
+    let finalString = (function (arr) {
+
+        if (arr.length < 2)
+            return arr.join('')
+
+        let left = arr.slice(0, arr.length - 2).join(', ')
+        let right = arr.slice(-2).join(' and ')
+
+        let res = [left, right]
+
+        return res.join(', ')
+
+    })(valid)
+
+    console.log(finalString)
 
 }
 
